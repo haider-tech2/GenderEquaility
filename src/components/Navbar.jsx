@@ -12,7 +12,6 @@ export default function Navbar() {
   const navItems = [
     { label: "Feed", path: "/home", options: [] },
     { label: "Create", path: "/create", options: [] },
-    { label: "Campaigns", path: "/campaigns", options: [] },
 
     ...(isAdmin
       ? [
