@@ -7,12 +7,13 @@ export default function Navbar() {
   const { user, loginWithGoogle, logout, userData } = useAuth()
   const [expandedIdx, setExpandedIdx] = useState(null)
 
-  // Admin check: only true if userData exists
   const isAdmin = userData?.isAdmin ?? false
 
   const navItems = [
     { label: "Feed", path: "/home", options: [] },
     { label: "Create", path: "/create", options: [] },
+    { label: "Campaigns", path: "/campaigns", options: [] },
+
     ...(isAdmin
       ? [
           {
@@ -59,7 +60,7 @@ export default function Navbar() {
         </div>
       </Link>
 
-      {/* Nav buttons */}
+      {/* Nav Buttons */}
       <div style={{ display: "flex", gap: 16, alignItems: "center", position: "relative" }}>
         {navItems.map((item, idx) => (
           <div
@@ -68,7 +69,6 @@ export default function Navbar() {
             onMouseEnter={() => setExpandedIdx(idx)}
             onMouseLeave={() => setExpandedIdx(null)}
           >
-            {/* Button */}
             <motion.div
               whileHover={{ scale: 1.12 }}
               whileTap={{ scale: 0.95 }}
@@ -89,7 +89,7 @@ export default function Navbar() {
                 {item.label}
               </Link>
 
-              {/* Glint animation */}
+              {/* Glint Animation */}
               <motion.div
                 initial={{ x: "-100%" }}
                 whileHover={{ x: "150%" }}
@@ -107,7 +107,7 @@ export default function Navbar() {
               />
             </motion.div>
 
-            {/* Dropdown / Dynamic Island */}
+            {/* Dropdown */}
             <AnimatePresence>
               {expandedIdx === idx && item.options.length > 0 && (
                 <motion.div
@@ -132,7 +132,7 @@ export default function Navbar() {
                   {item.options.map((opt, i) => (
                     <Link
                       key={i}
-                      to={item.path + "/" + opt.toLowerCase()}
+                      to={`${item.path}/${opt.toLowerCase()}`}
                       style={{
                         display: "block",
                         padding: "10px 16px",
@@ -140,7 +140,9 @@ export default function Navbar() {
                         textDecoration: "none",
                         fontWeight: 500,
                         borderBottom:
-                          i < item.options.length - 1 ? "1px solid rgba(255,255,255,0.1)" : "none",
+                          i < item.options.length - 1
+                            ? "1px solid rgba(255,255,255,0.1)"
+                            : "none",
                         whiteSpace: "nowrap"
                       }}
                     >
@@ -153,7 +155,7 @@ export default function Navbar() {
           </div>
         ))}
 
-        {/* Login / Logout */}
+        {/* Auth Button */}
         {user ? (
           <motion.button
             whileHover={{ scale: 1.1 }}

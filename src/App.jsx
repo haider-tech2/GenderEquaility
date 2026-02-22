@@ -5,6 +5,7 @@ import CreateReport from "./pages/CreateReport"
 import AdminPanel from "./pages/AdminPanel"
 import Navbar from "./components/Navbar"
 import { useAuth } from "./context/AuthContext"
+import Campaigns from "./pages/Campaigns"
 
 export default function App() {
   const { user } = useAuth()
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={user ? <Home /> : <Landing />} />
         <Route path="/create" element={user ? <CreateReport /> : <Landing />} />
+        <Route path="/campaigns" element={<Campaigns />} />
         <Route path="/admin" element={user ? <AdminPanel /> : <Landing />} />
       </Routes>
     </>
