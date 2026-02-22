@@ -16,23 +16,21 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const auth = getAuth()
 
-  // Login with Google
+
   const loginWithGoogle = async () => {
     const provider = new GoogleAuthProvider()
     const result = await signInWithPopup(auth, provider)
     const loggedUser = result.user
 
-    // Check if user document exists
     const userRef = doc(db, "users", loggedUser.uid)
     const docSnap = await getDoc(userRef)
 
     if (!docSnap.exists()) {
-      // Create new user document in Firestore
       await setDoc(userRef, {
         displayName: loggedUser.displayName,
         email: loggedUser.email,
         photoURL: loggedUser.photoURL,
-        isAdmin: false, // default to false
+        isAdmin: false, 
         createdAt: new Date()
       })
     }
@@ -56,7 +54,6 @@ export const AuthProvider = ({ children }) => {
           email: currentUser.email,
           photoURL: currentUser.photoURL
         })
-        // Optional: ensure user doc exists
         const userRef = doc(db, "users", currentUser.uid)
         const docSnap = await getDoc(userRef)
         if (!docSnap.exists()) {

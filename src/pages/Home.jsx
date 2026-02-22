@@ -22,7 +22,7 @@ export default function Home() {
   const [filter, setFilter] = useState("latest") // latest, pinned
   const [currentUserIsAdmin, setCurrentUserIsAdmin] = useState(false)
 
-  // Fetch posts
+
   useEffect(() => {
     const q = query(collection(db, "reports"), orderBy("timestamp", "desc"))
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -35,7 +35,7 @@ export default function Home() {
     return () => unsubscribe()
   }, [])
 
-  // Check if current user is admin
+
   useEffect(() => {
     const fetchAdmin = async () => {
       if (!user) return

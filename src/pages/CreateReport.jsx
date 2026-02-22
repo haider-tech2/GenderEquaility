@@ -54,8 +54,8 @@ export default function CreateReport() {
         alignItems: "center",
         padding: "50px 20px",
         background: "#111",
-        overflowX: "hidden", // hide horizontal scroll
-        boxSizing: "border-box", // prevents padding from causing overflow
+        overflowX: "hidden", 
+        boxSizing: "border-box", 
       }}
     >
       <motion.div
@@ -71,7 +71,7 @@ export default function CreateReport() {
           width: "100%",
           boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
           color: "#fff",
-          boxSizing: "border-box", // ensures motion div width doesn't overflow
+          boxSizing: "border-box", 
         }}
       >
         <h2 style={{ fontSize: "2rem", marginBottom: 20, textAlign: "center" }}>Post</h2>
@@ -82,7 +82,7 @@ export default function CreateReport() {
             display: "flex",
             flexDirection: "column",
             gap: 20,
-            maxWidth: "100%", // prevent inner overflow
+            maxWidth: "100%", 
           }}
         >
           <input

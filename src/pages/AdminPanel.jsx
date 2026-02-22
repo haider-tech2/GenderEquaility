@@ -15,18 +15,18 @@ export default function AdminPanel() {
   const [posts, setPosts] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
 
-  // Check if user is admin
+
   useEffect(() => {
     if (!user) return
     const fetchAdminStatus = async () => {
       const docRef = doc(db, "users", user.uid)
-      const docSnap = await docRef.get() // getDoc can also be used
+      const docSnap = await docRef.get()
       if (docSnap.exists()) setIsAdmin(docSnap.data().isAdmin)
     }
     fetchAdminStatus()
   }, [user])
 
-  // Fetch posts
+
   useEffect(() => {
     const q = collection(db, "reports")
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -35,20 +35,20 @@ export default function AdminPanel() {
     return () => unsubscribe()
   }, [])
 
-  // Mark post as resolved
+
   const markResolved = async (post) => {
     const postRef = doc(db, "reports", post.id)
     await updateDoc(postRef, { resolved: !post.resolved })
   }
 
-  // Delete post
+
   const deletePost = async (post) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return
     const postRef = doc(db, "reports", post.id)
     await deleteDoc(postRef)
   }
 
-  // Delete comment
+ 
   const deleteComment = async (post, comment) => {
     const postRef = doc(db, "reports", post.id)
     const updatedComments = post.comments.filter((c) => c.timestamp !== comment.timestamp)
